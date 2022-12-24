@@ -1,0 +1,20 @@
+.contact__item {
+  display: flex;
+  padding: 5px;
+  margin: 0;
+  align-items: center;
+  border: 1px solid grey;
+  margin-bottom: 2px;
+  width: 50%;
+  justify-content: space-between;
+}
+
+.contact__name {
+  margin: 0;
+}
+
+.contact__Button {
+  margin-left: auto;
+  min-height: 20px;
+  padding: 5px;
+}
