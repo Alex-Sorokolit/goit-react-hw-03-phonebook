@@ -9,6 +9,40 @@ export class App extends Component {
     contacts: [],
     filter: '',
   };
+  // Методи React.Component...........................................
+  // При монтуванні компонента(відбувається один раз)
+  componentDidMount() {
+    console.log('componentDidMount');
+    // Дістаємо дані із localStorage
+    const contacts = localStorage.getItem('contacts');
+    const parsedContacts = JSON.parse(contacts);
+    // console.log(parsedContacts);
+
+    // Записуємо із localStorage в state, з перевіркою на наявність даних в localeStorage
+    if (parsedContacts) {
+      this.setState({ contacts: parsedContacts });
+    }
+  }
+
+  // При обновленні компонента (зміна props або state)
+  componentDidUpdate(prevProps, prevState) {
+    console.log('componentDidUpdate');
+    // console.log(prevState);
+    // console.log(this.state);
+    // Перевірка чи обновився state, ❗❗❗без цієї перевірки неможна робити setState (відбудеться зациклення компонента)
+    if (this.state.contacts !== prevState.contacts) {
+      console.log('Обновилось поле contacts');
+
+      // Запис в localstorage
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
+  // ...........................................
+
+  // При розмонтуванні компонента
+  componentWillUnmount() {
+    console.log('componentWillUnmount');
+  }
 
   changeFilter = event => {
     this.setState({ filter: event.currentTarget.value });
@@ -33,7 +67,7 @@ export class App extends Component {
 
   // Додає дані користувача у масив
   addContacts = ({ name, number }) => {
-    console.log(name, number);
+    // console.log(name, number);
     // Перевірка чи існує контакт із таким ім'ям у масиві
     const { contacts } = this.state;
     if (

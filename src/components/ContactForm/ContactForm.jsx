@@ -16,7 +16,7 @@ class ContactForm extends Component {
   // Метод виконується при сабміті форми
   handleSubmit = event => {
     event.preventDefault();
-    console.log(this.state.name);
+    // console.log(this.state.name);
 
     // Записуємо у пропс значення стейту (передаємо дані у App-компонент)
     this.props.addContacts(this.state);
